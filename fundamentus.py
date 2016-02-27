@@ -15,6 +15,8 @@ def get_data(*args, **kwargs):
     opener.addheaders = [('User-agent', 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
                          ('Accept', 'text/html, text/plain, text/css, text/sgml, */*;q=0.01')]
 
+    # Aqui estão os parâmetros de busca das ações
+    # Estão em branco para que retorne todas as disponíveis
     data = {'pl_min':'',
             'pl_max':'',
             'pvp_min':'',
