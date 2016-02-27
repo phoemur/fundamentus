@@ -18,6 +18,8 @@ class WaitingBar(object):
     # Do something slow here
     (...)
     THE_BAR.stop()
+    
+    copyright phoemur - 2016
     '''
 
     def __init__(self, message='[*] Wait until loading is complete...'):
