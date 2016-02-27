@@ -13,8 +13,7 @@ def get_data(*args, **kwargs):
     cj = http.cookiejar.CookieJar()
     opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
     opener.addheaders = [('User-agent', 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
-                         ('Accept', 'text/html, text/plain, text/css, text/sgml, */*;q=0.01'),
-                         ('Cache-Control', 'no-cache')]
+                         ('Accept', 'text/html, text/plain, text/css, text/sgml, */*;q=0.01')]
 
     data = {'pl_min':'',
             'pl_max':'',
@@ -90,7 +89,11 @@ def get_data(*args, **kwargs):
     return lista
     
 if __name__ == '__main__':
+    from waitingbar import WaitingBar
+    
+    THE_BAR = WaitingBar('[*] Downloading...')
     lista = get_data()
+    THE_BAR.stop()
     
     print('{0:<7} {1:<7} {2:<10} {3:<7} {4:<10} {5:<7} {6:<10} {7:<10} {8:<10} {9:<11} {10:<11} {11:<7} {12:<11} {13:<14} {14:<7}'.format('Papel',
                                                                                                                                           'Cotação',
