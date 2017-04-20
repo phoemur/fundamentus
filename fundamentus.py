@@ -10,6 +10,7 @@ from lxml.html import fragment_fromstring
 from collections import OrderedDict
 from firebase import firebase
 import json
+import ast
 
 def get_data(*args, **kwargs):
     url = 'http://www.fundamentus.com.br/resultado.php'
@@ -118,40 +119,96 @@ if __name__ == '__main__':
         str(array_format[i][0]):array_format[0][1]
       }
 
-#     json_format = {
-#   'DAGB33': {
-#      'ROE': '-0,47%',
-#      'Liq.Corr.': '1,16',
-#      'Liq.2m.': '916.730,00',
-#      'EBITDA': '4,75%',
-#      'PSR': '0,000',
-#      'ROIC': '4,59%',
-#      'P/Ativo': '0,000',
-#      'Pat.Liq': '9.803.230.000,00',
-#      'cotacao': '480,00',
-#      'P/EBIT': '0,00',
-#      'P/Cap.Giro': '0,00',
-#      'DY': '0,00%',
-#      'P/VP': '0,00',
-#      'Mrg.Liq.': '0,38%',
-#      'P/L': '0,00',
-#      'P/Ativ.Circ.Liq.': '0,00',
-#      'Div.Brut/Pat.': '1,37',
-#      'EV/EBIT': '0,00',
-#      'Cresc.5a': '46,43%'
-#   }
-# }
+    # json_format = {
+    #     "0": {
+    #         "DAGB33": {
+    #             "Cresc.5a": "46,43%",
+    #             "DY": "0,00%",
+    #             "Div.Brut/Pat.": "1,37",
+    #             "EBITDA": "4,75%",
+    #             "EV/EBIT": "0,00",
+    #             "Liq.2m.": "916.730,00",
+    #             "Liq.Corr.": "1,16",
+    #             "Mrg.Liq.": "0,38%",
+    #             "P/Ativ.Circ.Liq.": "0,00",
+    #             "P/Ativo": "0,000",
+    #             "P/Cap.Giro": "0,00",
+    #             "P/EBIT": "0,00",
+    #             "P/L": "0,00",
+    #             "P/VP": "0,00",
+    #             "PSR": "0,000",
+    #             "Pat.Liq": "9.803.230.000,00",
+    #             "ROE": "-0,47%",
+    #             "ROIC": "4,59%",
+    #             "cotacao": "480,00"
+    #         }
+    #     },
+    #     "1": {
+    #         "ATOM3": {
+    #             "Cresc.5a": "46,43%",
+    #             "DY": "0,00%",
+    #             "Div.Brut/Pat.": "1,37",
+    #             "EBITDA": "4,75%",
+    #             "EV/EBIT": "0,00",
+    #             "Liq.2m.": "916.730,00",
+    #             "Liq.Corr.": "1,16",
+    #             "Mrg.Liq.": "0,38%",
+    #             "P/Ativ.Circ.Liq.": "0,00",
+    #             "P/Ativo": "0,000",
+    #             "P/Cap.Giro": "0,00",
+    #             "P/EBIT": "0,00",
+    #             "P/L": "0,00",
+    #             "P/VP": "0,00",
+    #             "PSR": "0,000",
+    #             "Pat.Liq": "9.803.230.000,00",
+    #             "ROE": "-0,47%",
+    #             "ROIC": "4,59%",
+    #             "cotacao": "480,00"
+    #         }
+    #     }
+    # }
 
-    # new_json = json_format
 
     # beautify JSON
     new_json = json.dumps(json_format, sort_keys=True, indent=4, separators=(',', ': '))
-    # # Write in the file
-    file_output.write(new_json)
+
+    # transform back again in dict
+    new_json = ast.literal_eval(new_json)
+
+    # print (new_json)
+
+    # Calculate the score of the stock
+    for key in new_json.keys():
+        # print (new_json[key])
+        if key != 'date':
+            for stock in new_json[key]:
+                nota = 0
+                if float(new_json[key][stock]["Pat.Liq"].replace('.', '').replace(',', '.')) > 2000000000:
+                    nota = nota + 1
+                if float(new_json[key][stock]["Liq.Corr."].replace('.', '').replace(',', '.')) > 1.5:
+                    nota = nota + 1
+                if float(new_json[key][stock]["ROE"].replace('.', '').replace(',', '.').replace('%', '')) > 20: 
+                    nota = nota + 1
+                if float(new_json[key][stock]["Div.Brut/Pat."].replace('.', '').replace(',', '.').replace('%', '')) < 0.5: 
+                    nota = nota + 1
+                if float(new_json[key][stock]["Cresc.5a"].replace('.', '').replace(',', '.').replace('%', '')) > 5: 
+                    nota = nota + 1
+                if float(new_json[key][stock]["P/VP"].replace('.', '').replace(',', '.').replace('%', '')) < 2: 
+                    nota = nota + 1
+                if float(new_json[key][stock]["P/L"].replace('.', '').replace(',', '.').replace('%', '')) < 15: 
+                    nota = nota + 1
+                if float(new_json[key][stock]["DY"].replace('.', '').replace(',', '.').replace('%', '')) > 2.5: 
+                    nota = nota + 1
+                new_json[key][stock]["nota"] = float(nota) / 8.0
+
+
+
+    # Write in the file
+    file_output.write(str(new_json))
     file_output.close()
 
 
-    result = firebase.post('/stocks', data=new_json )
+    result = firebase.post('/stocks', data=str(new_json) )
     print (result)
     
 
