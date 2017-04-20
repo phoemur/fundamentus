@@ -4,7 +4,7 @@ principais indicadores fundamentalistas em formato JSON.
 A API utiliza o microframework Flask.
 Também é possível utilizar via linha de comando.
 
-#Website local
+# Website local
 Basta executar o arquivo html no navegador local com as seguintes flags:
 ```sh
 --disable-web-security --user-data-dir
