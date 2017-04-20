@@ -202,13 +202,17 @@ if __name__ == '__main__':
                 new_json[key][stock]["nota"] = float(nota) / 8.0
 
 
+    # beautify JSON
+    output_json = json.dumps(new_json, sort_keys=True, indent=4, separators=(',', ': '))
+
+    # print (output_json)
 
     # Write in the file
-    file_output.write(str(new_json))
+    file_output.write(output_json)
     file_output.close()
 
 
-    result = firebase.post('/stocks', data=str(new_json) )
+    result = firebase.post('/stocks', data=output_json )
     print (result)
     
 
