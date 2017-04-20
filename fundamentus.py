@@ -104,6 +104,19 @@ if __name__ == '__main__':
 
     #Transform em uma lista, agora preciso passar para formato JSON
     array_format = list(lista.items())
+    # print (array_format[0][0])
+    # print (array_format[0][1])
+
+    json_format = {}
+
+    for i in range(0, len(array_format)): 
+      json_format[str(i)] = {
+        str(array_format[i][0]):array_format[0][1]
+      }
+
+    print (json_format['0'])
+
+
 
 
     # result = firebase.put('/', 'stocks', json_format)
@@ -116,7 +129,7 @@ if __name__ == '__main__':
 
 
 
-    
+
     # print('{0:<7} {1:<7} {2:<10} {3:<7} {4:<10} {5:<7} {6:<10} {7:<10} {8:<10} {9:<11} {10:<11} {11:<7} {12:<11} {13:<14} {14:<7}'.format('Papel',
     #                                                                                                                                       'Cotação',
     #                                                                                                                                       'P/L',
