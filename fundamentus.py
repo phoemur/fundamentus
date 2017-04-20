@@ -4,6 +4,7 @@ import re
 import urllib.request
 import urllib.parse
 import http.cookiejar
+import time
 
 from lxml.html import fragment_fromstring
 from collections import OrderedDict
@@ -101,27 +102,58 @@ if __name__ == '__main__':
 
     firebase = firebase.FirebaseApplication('https://bovespastockratings.firebaseio.com/', None)
 
+    file_output = open('firebase.json', 'w')
+
 
     #Transform em uma lista, agora preciso passar para formato JSON
     array_format = list(lista.items())
-    # print (array_format[0][0])
-    # print (array_format[0][1])
 
-    json_format = {}
+    # Adiciona a data que esta pegando a info
+    json_format = {
+      "date": time.strftime("%c")
+    }
 
     for i in range(0, len(array_format)): 
       json_format[str(i)] = {
         str(array_format[i][0]):array_format[0][1]
       }
 
-    print (json_format['0'])
+#     json_format = {
+#   'DAGB33': {
+#      'ROE': '-0,47%',
+#      'Liq.Corr.': '1,16',
+#      'Liq.2m.': '916.730,00',
+#      'EBITDA': '4,75%',
+#      'PSR': '0,000',
+#      'ROIC': '4,59%',
+#      'P/Ativo': '0,000',
+#      'Pat.Liq': '9.803.230.000,00',
+#      'cotacao': '480,00',
+#      'P/EBIT': '0,00',
+#      'P/Cap.Giro': '0,00',
+#      'DY': '0,00%',
+#      'P/VP': '0,00',
+#      'Mrg.Liq.': '0,38%',
+#      'P/L': '0,00',
+#      'P/Ativ.Circ.Liq.': '0,00',
+#      'Div.Brut/Pat.': '1,37',
+#      'EV/EBIT': '0,00',
+#      'Cresc.5a': '46,43%'
+#   }
+# }
+
+    # beautify JSON
+    new_json = json.dumps(json_format, sort_keys=True, indent=4, separators=(',', ': '))
+    # Write in the file
+    file_output.write(new_json)
+    file_output.close()
 
 
-
-
-    # result = firebase.put('/', 'stocks', json_format)
+    # result = firebase.post('/stocks', new_json )
     # print (result)
     
+
+
 
 
 
