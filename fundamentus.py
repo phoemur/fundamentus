@@ -8,6 +8,7 @@ import http.cookiejar
 from lxml.html import fragment_fromstring
 from collections import OrderedDict
 from firebase import firebase
+import json
 
 def get_data(*args, **kwargs):
     url = 'http://www.fundamentus.com.br/resultado.php'
@@ -100,10 +101,21 @@ if __name__ == '__main__':
 
     firebase = firebase.FirebaseApplication('https://bovespastockratings.firebaseio.com/', None)
 
-    new_user = {0: 'Ozgur Vatansever'}
 
-    result = firebase.put('/', 'stocks', new_user)
-    print (result)
+    #Transform em uma lista, agora preciso passar para formato JSON
+    array_format = list(lista.items())
+
+
+    # result = firebase.put('/', 'stocks', json_format)
+    # print (result)
+    
+
+
+
+
+
+
+
     
     # print('{0:<7} {1:<7} {2:<10} {3:<7} {4:<10} {5:<7} {6:<10} {7:<10} {8:<10} {9:<11} {10:<11} {11:<7} {12:<11} {13:<14} {14:<7}'.format('Papel',
     #                                                                                                                                       'Cotação',
