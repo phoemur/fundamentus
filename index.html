@@ -9,14 +9,30 @@
 	<!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-          
-
 	<!-- Jquery -->
 	<script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
 
-	<script type="text/javascript" src="fundamentus.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDuB9xCssxTxtfjXmapm4nbDs4Ilb0cfQs",
+        authDomain: "bovespastockratings.firebaseapp.com",
+        databaseURL: "https://bovespastockratings.firebaseio.com",
+        projectId: "bovespastockratings",
+        storageBucket: "bovespastockratings.appspot.com",
+        messagingSenderId: "400579532744"
+      };
+      firebase.initializeApp(config);
+    </script>
+          
+
+
+	<script type="text/javascript" src="getFromFirebase.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
