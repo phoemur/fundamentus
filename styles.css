@@ -3,6 +3,7 @@
   to { transform: rotate(360deg); }
 }
 
+.hidden{display:none;}
 
 .screen {
   position: relative;
@@ -40,4 +41,8 @@
     transform: translateY(-50%);
     -webkit-animation: App-logo-spin 1.5s linear infinite;
     animation: App-logo-spin 1.5s linear infinite;
+}
+
+.stock {
+  color: #0062ff;
 }

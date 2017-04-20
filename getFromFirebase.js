@@ -21,6 +21,7 @@ database.ref().child('stocks').once('value').then(function(snapshot){
 	})
 
 	console.log(arrayStocksHistory);
+	buildTable(arrayStocksHistory[0]);
 	hideLoading();
 
 }, function(error){
@@ -29,6 +30,10 @@ database.ref().child('stocks').once('value').then(function(snapshot){
 
 
 var hideLoading = function(){
-	$('#loading-whell').css('display', "none");
-	$('#info').css('display', "block");
+	$('#loading-whell').addClass("hidden");
+	$('#info').removeClass("hidden");
+}
+
+var buildTable = function(data){
+	
 }
