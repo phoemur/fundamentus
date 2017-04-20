@@ -97,7 +97,7 @@ if __name__ == '__main__':
     from waitingbar import WaitingBar
     
     THE_BAR = WaitingBar('[*] Downloading...')
-    lista = get_data()
+    # lista = get_data()
     THE_BAR.stop()
 
     firebase = firebase.FirebaseApplication('https://bovespastockratings.firebaseio.com/', None)
@@ -106,51 +106,53 @@ if __name__ == '__main__':
 
 
     #Transform em uma lista, agora preciso passar para formato JSON
-    array_format = list(lista.items())
+    # array_format = list(lista.items())
 
     # Adiciona a data que esta pegando a info
     json_format = {
       "date": time.strftime("%c")
     }
 
-    for i in range(0, len(array_format)): 
-      json_format[str(i)] = {
-        str(array_format[i][0]):array_format[0][1]
-      }
+    # for i in range(0, len(array_format)): 
+    #   json_format[str(i)] = {
+    #     str(array_format[i][0]):array_format[0][1]
+    #   }
 
-#     json_format = {
-#   'DAGB33': {
-#      'ROE': '-0,47%',
-#      'Liq.Corr.': '1,16',
-#      'Liq.2m.': '916.730,00',
-#      'EBITDA': '4,75%',
-#      'PSR': '0,000',
-#      'ROIC': '4,59%',
-#      'P/Ativo': '0,000',
-#      'Pat.Liq': '9.803.230.000,00',
-#      'cotacao': '480,00',
-#      'P/EBIT': '0,00',
-#      'P/Cap.Giro': '0,00',
-#      'DY': '0,00%',
-#      'P/VP': '0,00',
-#      'Mrg.Liq.': '0,38%',
-#      'P/L': '0,00',
-#      'P/Ativ.Circ.Liq.': '0,00',
-#      'Div.Brut/Pat.': '1,37',
-#      'EV/EBIT': '0,00',
-#      'Cresc.5a': '46,43%'
-#   }
-# }
+    json_format = {
+  'DAGB33': {
+     'ROE': '-0,47%',
+     'Liq.Corr.': '1,16',
+     'Liq.2m.': '916.730,00',
+     'EBITDA': '4,75%',
+     'PSR': '0,000',
+     'ROIC': '4,59%',
+     'P/Ativo': '0,000',
+     'Pat.Liq': '9.803.230.000,00',
+     'cotacao': '480,00',
+     'P/EBIT': '0,00',
+     'P/Cap.Giro': '0,00',
+     'DY': '0,00%',
+     'P/VP': '0,00',
+     'Mrg.Liq.': '0,38%',
+     'P/L': '0,00',
+     'P/Ativ.Circ.Liq.': '0,00',
+     'Div.Brut/Pat.': '1,37',
+     'EV/EBIT': '0,00',
+     'Cresc.5a': '46,43%'
+  }
+}
+
+    new_json = json_format
 
     # beautify JSON
-    new_json = json.dumps(json_format, sort_keys=True, indent=4, separators=(',', ': '))
-    # Write in the file
-    file_output.write(new_json)
-    file_output.close()
+    # new_json = json.dumps(json_format, sort_keys=True, indent=4, separators=(',', ': '))
+    # # Write in the file
+    # file_output.write(new_json)
+    # file_output.close()
 
 
-    # result = firebase.post('/stocks', new_json )
-    # print (result)
+    result = firebase.post('/stocks', data=new_json )
+    print (result)
     
 
 
