@@ -4,13 +4,17 @@ import re
 import urllib.request
 import urllib.parse
 import http.cookiejar
+import time
 
 from lxml.html import fragment_fromstring
 from collections import OrderedDict
+from firebase import firebase
+import json
+import ast
 
 def get_data(*args, **kwargs):
     url = 'http://www.fundamentus.com.br/resultado.php'
-    cj = http.cookiejar.CookieJar()
+    cj = http.cookiejar.CookieJar() 
     opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
     opener.addheaders = [('User-agent', 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
                          ('Accept', 'text/html, text/plain, text/css, text/sgml, */*;q=0.01')]
@@ -96,38 +100,162 @@ if __name__ == '__main__':
     THE_BAR = WaitingBar('[*] Downloading...')
     lista = get_data()
     THE_BAR.stop()
+
+    firebase = firebase.FirebaseApplication('https://bovespastockratings.firebaseio.com/', None)
+
+    file_output = open('firebase.json', 'w')
+
+
+    #Transform em uma lista, agora preciso passar para formato JSON
+    array_format = list(lista.items())
+
+    # Adiciona a data que esta pegando a info
+    json_format = {
+      "date": time.strftime("%c")
+    }
+
+    for i in range(0, len(array_format)): 
+      json_format[str(i)] = {
+        str(array_format[i][0]):array_format[0][1]
+      }
+
+    # json_format = {
+    #     "0": {
+    #         "DAGB33": {
+    #             "Cresc.5a": "46,43%",
+    #             "DY": "0,00%",
+    #             "Div.Brut/Pat.": "1,37",
+    #             "EBITDA": "4,75%",
+    #             "EV/EBIT": "0,00",
+    #             "Liq.2m.": "916.730,00",
+    #             "Liq.Corr.": "1,16",
+    #             "Mrg.Liq.": "0,38%",
+    #             "P/Ativ.Circ.Liq.": "0,00",
+    #             "P/Ativo": "0,000",
+    #             "P/Cap.Giro": "0,00",
+    #             "P/EBIT": "0,00",
+    #             "P/L": "0,00",
+    #             "P/VP": "0,00",
+    #             "PSR": "0,000",
+    #             "Pat.Liq": "9.803.230.000,00",
+    #             "ROE": "-0,47%",
+    #             "ROIC": "4,59%",
+    #             "cotacao": "480,00"
+    #         }
+    #     },
+    #     "1": {
+    #         "ATOM3": {
+    #             "Cresc.5a": "46,43%",
+    #             "DY": "0,00%",
+    #             "Div.Brut/Pat.": "1,37",
+    #             "EBITDA": "4,75%",
+    #             "EV/EBIT": "0,00",
+    #             "Liq.2m.": "916.730,00",
+    #             "Liq.Corr.": "1,16",
+    #             "Mrg.Liq.": "0,38%",
+    #             "P/Ativ.Circ.Liq.": "0,00",
+    #             "P/Ativo": "0,000",
+    #             "P/Cap.Giro": "0,00",
+    #             "P/EBIT": "0,00",
+    #             "P/L": "0,00",
+    #             "P/VP": "0,00",
+    #             "PSR": "0,000",
+    #             "Pat.Liq": "9.803.230.000,00",
+    #             "ROE": "-0,47%",
+    #             "ROIC": "4,59%",
+    #             "cotacao": "480,00"
+    #         }
+    #     }
+    # }
+
+
+    # beautify JSON
+    new_json = json.dumps(json_format, sort_keys=True, indent=4, separators=(',', ': '))
+
+    # transform back again in dict
+    new_json = ast.literal_eval(new_json)
+
+    # print (new_json)
+
+    # Calculate the score of the stock
+    for key in new_json.keys():
+        # print (new_json[key])
+        if key != 'date':
+            for stock in new_json[key]:
+                nota = 0
+                if float(new_json[key][stock]["Pat.Liq"].replace('.', '').replace(',', '.')) > 2000000000:
+                    nota = nota + 1
+                if float(new_json[key][stock]["Liq.Corr."].replace('.', '').replace(',', '.')) > 1.5:
+                    nota = nota + 1
+                if float(new_json[key][stock]["ROE"].replace('.', '').replace(',', '.').replace('%', '')) > 20: 
+                    nota = nota + 1
+                if float(new_json[key][stock]["Div.Brut/Pat."].replace('.', '').replace(',', '.').replace('%', '')) < 0.5: 
+                    nota = nota + 1
+                if float(new_json[key][stock]["Cresc.5a"].replace('.', '').replace(',', '.').replace('%', '')) > 5: 
+                    nota = nota + 1
+                if float(new_json[key][stock]["P/VP"].replace('.', '').replace(',', '.').replace('%', '')) < 2: 
+                    nota = nota + 1
+                if float(new_json[key][stock]["P/L"].replace('.', '').replace(',', '.').replace('%', '')) < 15: 
+                    nota = nota + 1
+                if float(new_json[key][stock]["DY"].replace('.', '').replace(',', '.').replace('%', '')) > 2.5: 
+                    nota = nota + 1
+                new_json[key][stock]["nota"] = float(nota) / 8.0
+
+
+    # beautify JSON
+    output_json = json.dumps(new_json, sort_keys=True, indent=4, separators=(',', ': '))
+
+    # print (output_json)
+
+    # Write in the file
+    file_output.write(output_json)
+    file_output.close()
+
+
+    result = firebase.post('/stocks', data=output_json )
+    print (result)
     
-    print('{0:<7} {1:<7} {2:<10} {3:<7} {4:<10} {5:<7} {6:<10} {7:<10} {8:<10} {9:<11} {10:<11} {11:<7} {12:<11} {13:<14} {14:<7}'.format('Papel',
-                                                                                                                                          'Cotação',
-                                                                                                                                          'P/L',
-                                                                                                                                          'P/VP',
-                                                                                                                                          'PSR',
-                                                                                                                                          'DY',
-                                                                                                                                          'P/EBIT',
-                                                                                                                                          'EV/EBIT',
-                                                                                                                                          'EBITDA',
-                                                                                                                                          'Mrg.Liq.',
-                                                                                                                                          'Liq.Corr.',
-                                                                                                                                          'ROIC',
-                                                                                                                                          'ROE',
-                                                                                                                                          'Div.Brut/Pat.',
-                                                                                                                                          'Cresc.5a'))
+
+
+
+
+
+
+
+
+
+
+    # print('{0:<7} {1:<7} {2:<10} {3:<7} {4:<10} {5:<7} {6:<10} {7:<10} {8:<10} {9:<11} {10:<11} {11:<7} {12:<11} {13:<14} {14:<7}'.format('Papel',
+    #                                                                                                                                       'Cotação',
+    #                                                                                                                                       'P/L',
+    #                                                                                                                                       'P/VP',
+    #                                                                                                                                       'PSR',
+    #                                                                                                                                       'DY',
+    #                                                                                                                                       'P/EBIT',
+    #                                                                                                                                       'EV/EBIT',
+    #                                                                                                                                       'EBITDA',
+    #                                                                                                                                       'Mrg.Liq.',
+    #                                                                                                                                       'Liq.Corr.',
+    #                                                                                                                                       'ROIC',
+    #                                                                                                                                       'ROE',
+    #                                                                                                                                       'Div.Brut/Pat.',
+    #                                                                                                                                       'Cresc.5a'))
     
-    print('-'*154)
-    for k, v in lista.items():
-        print('{0:<7} {1:<7} {2:<10} {3:<7} {4:<10} {5:<7} {6:<10} {7:<10} {8:<10} {9:<11} {10:<11} {11:<7} {12:<11} {13:<14} {14:<7}'.format(k,
-                                                                                                                                              v['cotacao'],
-                                                                                                                                              v['P/L'],
-                                                                                                                                              v['P/VP'],
-                                                                                                                                              v['PSR'],
-                                                                                                                                              v['DY'],
-                                                                                                                                              v['P/EBIT'],
-                                                                                                                                              v['EV/EBIT'],
-                                                                                                                                              v['EBITDA'],
-                                                                                                                                              v['Mrg.Liq.'],
-                                                                                                                                              v['Liq.Corr.'],
-                                                                                                                                              v['ROIC'],
-                                                                                                                                              v['ROE'],
-                                                                                                                                              v['Div.Brut/Pat.'],
-                                                                                                                                              v['Cresc.5a']))
+    # print('-'*154)
+    # for k, v in lista.items():
+    #     print('{0:<7} {1:<7} {2:<10} {3:<7} {4:<10} {5:<7} {6:<10} {7:<10} {8:<10} {9:<11} {10:<11} {11:<7} {12:<11} {13:<14} {14:<7}'.format(k,
+    #                                                                                                                                           v['cotacao'],
+    #                                                                                                                                           v['P/L'],
+    #                                                                                                                                           v['P/VP'],
+    #                                                                                                                                           v['PSR'],
+    #                                                                                                                                           v['DY'],
+    #                                                                                                                                           v['P/EBIT'],
+    #                                                                                                                                           v['EV/EBIT'],
+    #                                                                                                                                           v['EBITDA'],
+    #                                                                                                                                           v['Mrg.Liq.'],
+    #                                                                                                                                           v['Liq.Corr.'],
+    #                                                                                                                                           v['ROIC'],
+    #                                                                                                                                           v['ROE'],
+    #                                                                                                                                           v['Div.Brut/Pat.'],
+    #                                                                                                                                           v['Cresc.5a']))
 

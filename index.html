@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ações BOVESPA</title>
+
+	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+	<!-- Jquery -->
+	<script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDuB9xCssxTxtfjXmapm4nbDs4Ilb0cfQs",
+        authDomain: "bovespastockratings.firebaseapp.com",
+        databaseURL: "https://bovespastockratings.firebaseio.com",
+        projectId: "bovespastockratings",
+        storageBucket: "bovespastockratings.appspot.com",
+        messagingSenderId: "400579532744"
+      };
+      firebase.initializeApp(config);
+    </script>
+          
+
+
+	<script type="text/javascript" src="getFromFirebase.js"></script>
+</head>
+<body>
+	<nav>
+	    <div class="nav-wrapper">
+	      <a href="#" class="brand-logo">Ranking de Ações BOVESPA</a>
+	      <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
+	        <li><a href="sass.html">Sass</a></li>
+	        <li><a href="badges.html">Components</a></li>
+	        <li><a href="collapsible.html">JavaScript</a></li>
+	      </ul> -->
+	    </div>
+	  </nav>
+	<div class="container-fluid">
+		<div id="loading-whell" class="loading-wheel"></div>
+		<div id="info" class="row hidden">
+			<div class="col-lg-12" id="info">
+
+				<table id="resultado" border="0" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th  class="fd-column-0 sortable-text ">Papel</th>
+							<th  class="sortable-numeric fd-column-1"><a href="#" data-toggle="tooltip" title="Calculada de acordo com os principios fundamentalistas de Benjamim Graham">Nota</a></th>
+							<th  class="sortable-numeric fd-column-1">Cotação</th>
+							<th  class="sortable-numeric fd-column-17">Patrim. Líq</th>
+							<th  class="sortable-numeric fd-column-13">Liq. Corr.</th>
+							<th  class="sortable-numeric fd-column-15">ROE</th>
+							<th  class="sortable-numeric fd-column-18">Dív.Brut/ Patrim.</th>
+							<th  class="sortable-numeric fd-column-19">Cresc. Rec.5a</th>
+							<th  class="sortable-numeric fd-column-3">P/VP</th>
+							<th  class="sortable-numeric fd-column-2">P/L</th>
+							<th  class="sortable-numeric fd-column-5">Div.Yield</th>
+						</tr>
+					</thead>
+					<tbody>
+	        			<tr class="">
+				            <td class="stock">MNSA3</td>
+				            <td>7,2</td>
+				            <td>-208,15%</td>
+				            <td>-362,66%</td>
+				            <td>3,63</td>
+				            <td>-13,50%</td>
+				            <td>145,70%</td>
+				            <td>0,00</td>
+				            <td>-9.105.000,00</td>
+				            <td>-6,52</td>
+				            <td>-41,11%</td>
+				        </tr>
+				    </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
