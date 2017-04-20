@@ -8,6 +8,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 
 	<!-- Jquery -->
 	<script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
@@ -35,9 +36,21 @@
 	<script type="text/javascript" src="getFromFirebase.js"></script>
 </head>
 <body>
+	<nav>
+	    <div class="nav-wrapper">
+	      <a href="#" class="brand-logo">Ranking de Ações BOVESPA</a>
+	      <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
+	        <li><a href="sass.html">Sass</a></li>
+	        <li><a href="badges.html">Components</a></li>
+	        <li><a href="collapsible.html">JavaScript</a></li>
+	      </ul> -->
+	    </div>
+	  </nav>
 	<div class="container-fluid">
-		<div class="row">
+		<div id="loading-whell" class="loading-wheel"></div>
+		<div id="info" class="row" style="display:none">
 			<div class="col-lg-12" id="info">
+				Carreguei
 			</div>
 		</div>
 	</div>
