@@ -1,9 +1,7 @@
 # Bovespa Stock Ratings
 Uma plataforma para analisar dados fundamentalistas das ações da BOVESPA utilizando um crawler em python e um database em firebase
-
-## Acesso
-Para acessar basta clicar no link
 https://daniloaleixo.github.io/bovespaStockRatings/
+
 
 ## Análise 
 Estou fazendo uma análise baseada nos princípios fundamentalistas do livro [Investidor Inteligente](https://en.wikipedia.org/wiki/The_Intelligent_Investor) do Benjamin Graham: 
