@@ -17,4 +17,5 @@ Execute o server.py e conecte no endereço (ex.: http://127.0.0.1:5000/) com seu
 # Comand install
 
    `pip install Flask`
+   
    `pip install lxml`
