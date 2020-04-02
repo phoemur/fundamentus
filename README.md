@@ -4,6 +4,9 @@ principais indicadores fundamentalistas em formato JSON.
 A API utiliza o microframework Flask.
 Também é possível utilizar via linha de comando.
 
+# Instalar as bibliotecas
+    `pip3 install -r required.txt`
+
 # Linha de comando
     $ python3 fundamentus.py
 
