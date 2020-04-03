@@ -13,3 +13,6 @@ Execute o server.py e conecte no endereço (ex.: http://127.0.0.1:5000/) com seu
 # Requirements
     Flask
     lxml
+    
+Install with:
+    pip3 install -r required.txt
