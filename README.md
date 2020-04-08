@@ -9,11 +9,14 @@ Também é possível utilizar via linha de comando.
 
 # Linha de comando
     $ python3 fundamentus.py
-
+        
+# Acionar a aplicação
+    $ python3 server.py   
+                
 # API
-Execute o server.py e conecte no endereço (ex.: http://127.0.0.1:5000/) com seu browser
+Então acesse o endereço (ex.: http://127.0.0.1:5000/) com seu browser
 
-# Requirements
+# Requirements Libs
     Flask
     lxml
     
