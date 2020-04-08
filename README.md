@@ -20,7 +20,7 @@ Então acesse o endereço (ex.: http://127.0.0.1:5000/) com seu browser
     Flask
     lxml
     
-# Comand install
+# Comands install libs
 
    `pip install Flask`
    
