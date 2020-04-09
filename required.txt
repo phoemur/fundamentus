@@ -5,3 +5,4 @@ Jinja2>=2.10.1
 lxml>=4.0.0
 MarkupSafe>=1.0.0
 Werkzeug>=1.0.0
+flask_cors==3.0.3
