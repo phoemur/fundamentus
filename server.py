@@ -3,8 +3,11 @@
 from flask import Flask, jsonify
 from fundamentus import get_data
 from datetime import datetime
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
+
 
 # First update
 lista, dia = dict(get_data()), datetime.strftime(datetime.today(), '%d')
