@@ -4,24 +4,15 @@ principais indicadores fundamentalistas em formato JSON.
 A API utiliza o microframework Flask.
 Também é possível utilizar via linha de comando.
 
-# Instalar as bibliotecas
-    $ pip3 install -r required.txt
-
 # Linha de comando
     $ python3 fundamentus.py
-        
-# Acionar a aplicação
-    $ python3 server.py   
-                
-# API
-Então acesse o endereço (ex.: http://127.0.0.1:5000/) com seu browser
 
-# Requirements Libs
+# API
+Execute o server.py e conecte no endereço (ex.: http://127.0.0.1:5000/) com seu browser
+
+# Requirements
     Flask
     lxml
     
-# Comands install libs
-
-   `pip install Flask`
-   
-   `pip install lxml`
+Install with:
+    pip3 install -r required.txt
