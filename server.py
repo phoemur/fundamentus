@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 from flask import Flask, jsonify
 from fundamentus import get_data
 from datetime import datetime
@@ -25,4 +26,6 @@ def json_api():
         lista = {outer_k: {inner_k: float(inner_v) for inner_k, inner_v in outer_v.items()} for outer_k, outer_v in lista.items()}
         return jsonify(lista)
 
-app.run(debug=True)
+port = int(os.environ.get('PORT', 5000))
+
+app.run(debug=True, host='0.0.0.0', port=port) 
