@@ -2,6 +2,6 @@
 Flask>=1.0.0
 itsdangerous>=1.0.0
 Jinja2>=2.10.1
-lxml
+lxml>=4.6.2 
 MarkupSafe>=1.0.0
 Werkzeug>=1.0.0
