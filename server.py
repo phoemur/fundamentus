@@ -13,7 +13,7 @@ lista = {outer_k: {inner_k: float(inner_v) for inner_k, inner_v in outer_v.items
 @app.route("/")
 def json_api():
     global lista, dia
-    
+
     # Then only update once a day
     if dia == datetime.strftime(datetime.today(), '%d'):
         return jsonify(lista)
@@ -22,4 +22,5 @@ def json_api():
         lista = {outer_k: {inner_k: float(inner_v) for inner_k, inner_v in outer_v.items()} for outer_k, outer_v in lista.items()}
         return jsonify(lista)
 
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
