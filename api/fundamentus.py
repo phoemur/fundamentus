@@ -9,6 +9,7 @@ from lxml.html import fragment_fromstring
 from collections import OrderedDict
 from decimal import Decimal
 
+
 def get_data(*args, **kwargs):
     url = 'http://www.fundamentus.com.br/resultado.php'
     cookie_jar = http.cookiejar.CookieJar()
@@ -21,7 +22,7 @@ def get_data(*args, **kwargs):
     data = {'pl_min': '',
             'pl_max': '',
             'pvp_min': '',
-            'pvp_max' : '',
+            'pvp_max': '',
             'psr_min': '',
             'psr_max': '',
             'divy_min': '',
@@ -89,26 +90,22 @@ def get_data(*args, **kwargs):
                                                                         'Pat.Liq': todecimal(rows.getchildren()[18].text),
                                                                         'Div.Brut/Pat.': todecimal(rows.getchildren()[19].text),
                                                                         'Cresc.5anos': todecimal(rows.getchildren()[20].text)}})
-    
     return result
-    
-def todecimal(string):
-  string = string.replace('.', '')
-  string = string.replace(',', '.')
 
-  if (string.endswith('%')):
-    string = string[:-1]
-    return Decimal(string) / 100
-  else:
-    return Decimal(string)
+
+def todecimal(string):
+    string = string.replace('.', '').replace(',', '.')
+
+    if (string.endswith('%')):
+        string = string[:-1]
+        return Decimal(string) / 100
+    else:
+        return Decimal(string)
+
 
 if __name__ == '__main__':
-    from waitingbar import WaitingBar
-    
-    progress_bar = WaitingBar('[*] Downloading...')
-    result = get_data()
-    progress_bar.stop()
 
+    result = get_data()
     result_format = '{0:<7} {1:<7} {2:<10} {3:<7} {4:<10} {5:<7} {6:<10} {7:<10} {8:<10} {9:<11} {10:<11} {11:<7} {12:<11} {13:<11} {14:<7} {15:<11} {16:<5} {17:<7}'
     print(result_format.format('Papel',
                                'Cotacao',
