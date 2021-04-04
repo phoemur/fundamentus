@@ -7,7 +7,7 @@ client = TestClient(app)
 def test_get_main():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"Hello": "World"}
+    assert response.json()
 
 
 def test_get_ticker():
