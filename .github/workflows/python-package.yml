@@ -33,7 +33,6 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -v
-    - uses: actions/checkout@master
     - name: Coverage to Codecov   
     - uses: codecov/codecov-action@v1
       with:
