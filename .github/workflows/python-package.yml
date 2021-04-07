@@ -35,5 +35,4 @@ jobs:
         pytest -v
     - name: Coverage to Codecov   
       uses: codecov/codecov-action@v1
-        fail_ci_if_error: true # optional (default = false)
         verbose: true # optional (default = false)
