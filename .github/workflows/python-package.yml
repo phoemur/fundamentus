@@ -7,6 +7,7 @@ on: [push, pull_request]
 
 jobs:
   build:
+    name: build with python ${{ matrix.python-version }}
 
     runs-on: ubuntu-latest
     strategy:
@@ -14,6 +15,12 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
 
     steps:
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-    
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
