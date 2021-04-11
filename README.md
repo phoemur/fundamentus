@@ -1,3 +1,4 @@
+[![codecov](https://codecov.io/gh/mauricio-sousa/fundamentus/branch/master/graph/badge.svg?token=D74I99F0LU)](https://codecov.io/gh/mauricio-sousa/fundamentus)
 # Fundamentus
 Esta é uma pequena API feita em python3 para análise de ações da BOVESPA utilizando o site fundamentus (www.fundamentus.com.br), que retorna os 
 principais indicadores fundamentalistas em formato JSON.
