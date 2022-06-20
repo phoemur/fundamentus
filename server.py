@@ -22,4 +22,4 @@ def json_api():
         lista = {outer_k: {inner_k: float(inner_v) for inner_k, inner_v in outer_v.items()} for outer_k, outer_v in lista.items()}
         return jsonify(lista)
 
-app.run(debug=True)
+app.run(host='0.0.0.0', debug=True)
