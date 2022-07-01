@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template, Request
 from fundamentus import get_data
 from datetime import datetime
 import json
+from create_cvs import analise 
+from create_cvs import check_file 
 
 app = Flask(__name__)
 
@@ -21,11 +23,19 @@ def helth():
     )
     return response
 
+
+@app.route("/acoes/<page_id>",methods=['GET'])
+def melhores(page_id):
+    check_file()
+    anlise = analise(int(page_id))
+    return render_template('view.html', 
+        tables=[anlise.to_html()],
+        titles = ['na'])
+
+
 @app.route("/api/fundamentus.json",methods=['GET'])
 def json_api():
-    global lista, dia
-    
-    # Then only update once a day
+    global lista, dia    
     if dia == datetime.strftime(datetime.today(), '%d'):
         return jsonify(lista)
     else:

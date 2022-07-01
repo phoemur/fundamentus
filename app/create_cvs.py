@@ -11,7 +11,7 @@ def data_to_csv():
     df_data = df_data.rename(columns={'index':'Ticker'}) #rename 'index' columns to 'ticker'
     df_data.to_csv(r'fundamentus.csv', sep=';', index=False, mode='w') #save csv
 
-def analise():
+def analise(NUMBER):
     df_fundamentus = pd.read_csv('fundamentus.csv',sep=';')
     df_fundamentus = df_fundamentus[
         (df_fundamentus['DY'] <= 1) & (df_fundamentus['DY'] >= 0.06 ) & 
@@ -20,7 +20,7 @@ def analise():
         (df_fundamentus['ROE'] <= 0.7) & (df_fundamentus['ROE'] >= 0.001 ) &
         (df_fundamentus['EV/EBITDA'] >= 0.001 ) &
         (df_fundamentus['Ticker'].astype(str).str.contains('3|4'))].sort_values(by=["DY","P/VP","P/L"],ascending=False)
-    return df_fundamentus.head(30)
+    return df_fundamentus.head(NUMBER)
 
 def check_file():
     filePath = 'fundamentus.csv'
@@ -51,4 +51,4 @@ def check_file():
 if __name__ == '__main__':
     print('Check data at "funamentus.csv" file.')
     print("Last Modified Time : ", check_file())
-    print(analise())
+    print(analise(10))
