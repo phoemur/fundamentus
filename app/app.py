@@ -32,13 +32,12 @@ def melhores(page_id):
         print(e)
         return render_template('error.html')
 
-    if page_id < 100:
+    if page_id <= 100:
         check_file()
         anlise = analise(page_id)
         return render_template('view.html',tables=[anlise.to_html()],titles = ['na'])
     else:
         return render_template('error.html')
-    
 
 
 @app.route("/api/fundamentus.json",methods=['GET'])
