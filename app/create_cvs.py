@@ -1,8 +1,7 @@
 from fundamentus import get_data
 import pandas as pd
 import waitingbar
-import os, time, stat
-from datetime import datetime
+import os, time, stat, datetime
 
 
 def data_to_csv():
@@ -20,25 +19,36 @@ def analise():
         (df_fundamentus['P/VP'] <= 4) & (df_fundamentus['P/VP'] >= 0.01 ) &
         (df_fundamentus['ROE'] <= 0.7) & (df_fundamentus['ROE'] >= 0.001 ) &
         (df_fundamentus['EV/EBITDA'] >= 0.001 ) &
-        (df_fundamentus['Ticker'].astype(str).str.contains('3|4'))].sort_values(by=["DY","P/L","P/VP"],ascending=False)
+        (df_fundamentus['Ticker'].astype(str).str.contains('3|4'))].sort_values(by=["DY","P/VP","P/L"],ascending=False)
     return df_fundamentus.head(30)
 
-def modi():
+def check_file():
     filePath = 'fundamentus.csv'
     try:
         fileStatsObj = os.stat(filePath)
+        if os.path.exists(filePath):
+            today = datetime.datetime.today()
+            modified_date = datetime.datetime.fromtimestamp(os.path.getmtime(filePath))
+            duration = today - modified_date
+            if duration.days > 2:
+                print('Your file is old and may have modifications ...')
+                start_msg = waitingbar.WaitingBar('Starting download new data...')
+                data_to_csv()
+                start_msg.stop()
         modificationTime = time.ctime ( fileStatsObj [ stat.ST_MTIME ] )
+        c_time = os.path.getctime(filePath)
+        dt_c = datetime.datetime.fromtimestamp(c_time)
+        print('Created on:', dt_c)
+        m_time = os.path.getmtime(filePath)
+        dt_m = datetime.datetime.fromtimestamp(m_time)
+        print('Modified on:', dt_m)
+        return modificationTime
     except OSError:
-        print("Path '%s' does not exists or is inaccessible" %filePath)
-
-    times = os.path.getmtime(filePath)
-    return times
+        start_msg = waitingbar.WaitingBar('Starting download data...')
+        data_to_csv()
+        start_msg.stop()
 
 if __name__ == '__main__':
-    start_msg = waitingbar.WaitingBar('Starting download data...')
-    data_to_csv()
-    start_msg.stop()
     print('Check data at "funamentus.csv" file.')
+    print("Last Modified Time : ", check_file())
     print(analise())
-    print("Last Modified Time : ", modi())
-    print(datetime.now())
