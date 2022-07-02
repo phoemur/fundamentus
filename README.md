@@ -24,5 +24,5 @@ http://127.0.0.1/health
 
 Aqui voce pode colocar um valor menor ou igual a 100, como segue o exemplo
 
-http://127.0.0.1/acoes/10
-http://127.0.0.1/fii/10
+* http://127.0.0.1/acoes/10
+* http://127.0.0.1/fii/10
