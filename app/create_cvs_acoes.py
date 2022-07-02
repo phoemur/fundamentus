@@ -4,14 +4,14 @@ import waitingbar
 import os, time, stat, datetime
 
 
-def data_to_csv():
+def data_to_csv_acoes():
     data = get_data()
     data = {outer_k: {inner_k: float(inner_v) for inner_k, inner_v in outer_v.items()} for outer_k, outer_v in data.items()}
     df_data = pd.DataFrame.from_dict(data).transpose().reset_index() #transposing
     df_data = df_data.rename(columns={'index':'Ticker'}) #rename 'index' columns to 'ticker'
     df_data.to_csv(r'fundamentus.csv', sep=';', index=False, mode='w') #save csv
 
-def analise(NUMBER):
+def analise_acoes(NUMBER):
     df_fundamentus = pd.read_csv('fundamentus.csv',sep=';')
     df_fundamentus = df_fundamentus[
         (df_fundamentus['DY'] <= 1) & (df_fundamentus['DY'] >= 0.06 ) & 
@@ -22,7 +22,7 @@ def analise(NUMBER):
         (df_fundamentus['Ticker'].astype(str).str.contains('1|2|3|4|4|6'))].sort_values(by=["DY","P/VP","P/L"],ascending=False)
     return df_fundamentus.head(NUMBER)
 
-def check_file():
+def check_file_acoes():
     filePath = 'fundamentus.csv'
     try:
         fileStatsObj = os.stat(filePath)
@@ -50,5 +50,5 @@ def check_file():
 
 if __name__ == '__main__':
     print('Check data at "funamentus.csv" file.')
-    print("Last Modified Time : ", check_file())
-    print(analise(10))
+    print("Last Modified Time : ", check_file_acoes())
+    print(analise_acoes(10))

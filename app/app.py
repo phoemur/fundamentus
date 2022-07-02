@@ -4,8 +4,10 @@ from flask import Flask, jsonify, render_template, Request
 from fundamentus import get_data
 from datetime import datetime
 import json
-from create_cvs_acoes import analise 
-from create_cvs_acoes import check_file 
+from create_cvs_acoes import analise_acoes 
+from create_cvs_acoes import check_file_acoes 
+from create_cvs_fii import analise_fii 
+from create_cvs_fii import check_file_fii
 
 app = Flask(__name__)
 
@@ -29,7 +31,7 @@ def health():
 
 
 @app.route("/acoes/<page_id>",methods=['GET'])
-def melhores(page_id):
+def melhoresacoes(page_id):
     try:
         page_id = int(page_id)
     except ValueError as e:
@@ -37,9 +39,24 @@ def melhores(page_id):
         return render_template('error.html')
 
     if page_id <= 100:
-        check_file()
-        anlise = analise(page_id)
-        return render_template('view.html',tables=[anlise.to_html()],titles = ['na'])
+        check_file_acoes()
+        anlise = analise_acoes(page_id)
+        return render_template('view_acoes.html',tables=[anlise.to_html()],titles = ['na'])
+    else:
+        return render_template('error.html')
+
+@app.route("/fii/<page_id>",methods=['GET'])
+def melhoresfii(page_id):
+    try:
+        page_id = int(page_id)
+    except ValueError as e:
+        print(e)
+        return render_template('error.html')
+
+    if page_id <= 100:
+        check_file_fii()
+        anlise = analise_fii(page_id)
+        return render_template('view_fii.html',tables=[anlise.to_html()],titles = ['na'])
     else:
         return render_template('error.html')
 
