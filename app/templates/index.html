@@ -1,0 +1,14 @@
+<!doctype html>
+<title>Fundamentos API v1</title>
+
+<h1>Fundamentos API v1</h1>
+
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<div class=page>
+  <h2>Melhores escolhas</h2>
+  {% for table in tables %}
+    <h2>{{titles[loop.index]}}</h2>
+    {{ table|safe }}
+  {% endfor %}
+</div>
+

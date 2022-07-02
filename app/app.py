@@ -17,7 +17,12 @@ lista = {outer_k: {inner_k: float(inner_v) for inner_k, inner_v in outer_v.items
 
 @app.route("/",methods=['GET'])
 def fundamentus():
-    return '<h1 style="font-weight: bold">Fundamentos API</h1>'
+    check_file_acoes()
+    check_file_fii()
+    acoes = analise_acoes(5)
+    fii = analise_fii(5)
+    return  render_template('index.html',tables=[acoes.to_html(),fii.to_html()],titles = ['na'])
+
 
 @app.route("/health",methods=['GET'])
 def health():
