@@ -5,5 +5,5 @@ RUN pip install --upgrade pip
 COPY . /app
 WORKDIR /app
 RUN python -m pip install -r requirements.txt 
-EXPOSE 5000
+EXPOSE 8080
 CMD [ "python", "app.py" ]
