@@ -12,6 +12,16 @@ Esta é uma pequena API feita em python3 para análise de ações da BOVESPA uti
     $ python3 app/fundamentus.py
 
 # API
-Execute o app.py e conecte no endereço (ex.: http://127.0.0.1:5000/) com seu browser
+Execute o app.py e conecte no endereço (ex.: http://127.0.0.1:8080/) com seu browser
 
     $ python3 app/app.py
+
+# Health check
+
+http://127.0.0.1/health
+
+# Melhores Ações
+
+Aqui voce pode colocar um valor menor ou igual a 100, como segue o exemplo
+
+http://127.0.0.1/acoes/10
