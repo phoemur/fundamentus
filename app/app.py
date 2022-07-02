@@ -14,7 +14,11 @@ lista, dia = dict(get_data()), datetime.strftime(datetime.today(), '%d')
 lista = {outer_k: {inner_k: float(inner_v) for inner_k, inner_v in outer_v.items()} for outer_k, outer_v in lista.items()}
 
 @app.route("/",methods=['GET'])
-def helth():
+def fundamentus():
+    return '<h1 style="font-weight: bold">Fundamentos API</h1>'
+
+@app.route("/health",methods=['GET'])
+def health():
     data = {'api': 'up'}
     response = app.response_class(
         response=json.dumps(data),
