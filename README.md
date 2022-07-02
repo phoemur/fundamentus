@@ -20,8 +20,9 @@ Execute o app.py e conecte no endereço (ex.: http://127.0.0.1:8080/) com seu br
 
 http://127.0.0.1/health
 
-## Melhores Ações
+## Melhores ações e fundos imobiliários
 
 Aqui voce pode colocar um valor menor ou igual a 100, como segue o exemplo
 
 http://127.0.0.1/acoes/10
+http://127.0.0.1/fii/10

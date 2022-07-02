@@ -2,4 +2,3 @@ venv
 __pycache__
 test
 *.csv
-fundamentus.csv
