@@ -1,8 +1,9 @@
 body            { font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;}
 a, h1, h2       { color: #377ba8; }
 h1, h2          { margin: 0; }
-h1              { border-bottom: 2px solid #eee; }
-h2              { font-size: 1.2em; }
+h1              { border-bottom: 3px solid #eee; }
+h2              { font-size: 1.5em; }
+body            { font-size: 1.0em; }
 
 table.dataframe, .dataframe th, .dataframe td {
   border: none;
