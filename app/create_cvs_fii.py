@@ -31,7 +31,7 @@ def check_file_fii():
             if duration.days > 2:
                 print('Your file is old and may have modifications ...')
                 start_msg = waitingbar.WaitingBar('Starting download new data...')
-                data_to_csv()
+                data_to_csv_fii()
                 start_msg.stop()
         modificationTime = time.ctime ( fileStatsObj [ stat.ST_MTIME ] )
         c_time = os.path.getctime(filePath)
@@ -43,7 +43,7 @@ def check_file_fii():
         return modificationTime
     except OSError:
         start_msg = waitingbar.WaitingBar('Starting download data...')
-        data_to_csv()
+        data_to_csv_fii()
         start_msg.stop()
 
 if __name__ == '__main__':
