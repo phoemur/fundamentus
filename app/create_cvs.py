@@ -19,7 +19,7 @@ def analise(NUMBER):
         (df_fundamentus['P/VP'] <= 4) & (df_fundamentus['P/VP'] >= 0.01 ) &
         (df_fundamentus['ROE'] <= 0.7) & (df_fundamentus['ROE'] >= 0.001 ) &
         (df_fundamentus['EV/EBITDA'] >= 0.001 ) &
-        (df_fundamentus['Ticker'].astype(str).str.contains('3|4'))].sort_values(by=["DY","P/VP","P/L"],ascending=False)
+        (df_fundamentus['Ticker'].astype(str).str.contains('1|2|3|4|4|6'))].sort_values(by=["DY","P/VP","P/L"],ascending=False)
     return df_fundamentus.head(NUMBER)
 
 def check_file():
