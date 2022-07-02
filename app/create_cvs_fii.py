@@ -6,7 +6,7 @@ import os, time, stat, datetime
 
 def data_to_csv_fii():
     data = get_data()
-    data = {outer_k: {inner_k: float(inner_v) for inner_k, inner_v in outer_v.items()} for outer_k, outer_v in data.items()}
+    #data = {outer_k: {inner_k: float(inner_v) for inner_k, inner_v in outer_v.items()} for outer_k, outer_v in data.items()}
     df_data = pd.DataFrame.from_dict(data).transpose().reset_index() #transposing
     df_data = df_data.rename(columns={'index':'Ticker'}) #rename 'index' columns to 'ticker'
     df_data.to_csv(r'fundamentusfii.csv', sep=';', index=False, mode='w') #save csv
