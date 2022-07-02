@@ -4,8 +4,8 @@ from flask import Flask, jsonify, render_template, Request
 from fundamentus import get_data
 from datetime import datetime
 import json
-from create_cvs import analise 
-from create_cvs import check_file 
+from create_cvs_acoes import analise 
+from create_cvs_acoes import check_file 
 
 app = Flask(__name__)
 
