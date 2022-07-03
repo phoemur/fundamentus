@@ -1,8 +1,19 @@
 <!doctype html>
 <title>Melhores Fundos Imobiliários</title>
+<h1>Melhores Fundos Imobiliários</h1>
+
+<body></p>É possível viver de renda aplicando em fundos imobiliários, em vez de imóveis físicos, e com algumas vantagens. Desde que os brasileiros perceberam isso, o volume de novas carteiras emitidas cresceu sem parar. Os fundos imobiliários se tornaram um investimento da moda, vistos como uma maneira mais simples e barata de aplicar no setor.</p></body>
+
+<h3> que são fundos imobiliários?</h3>
+
+<body>Vamos começar pelo começo. Um fundo imobiliário é uma espécie de “condomínio” de investidores, que reúnem seus recursos para que sejam aplicados em conjunto no mercado imobiliário. A dinâmica mais tradicional é que o dinheiro seja usado na construção ou na aquisição de imóveis, que depois sejam locados ou arrendados. Os ganhos obtidos com essas operações são divididos entre os participantes, na proporção em que cada um aplicou.</p></body>
+
+<body>As decisões sobre o que fazer com os recursos – tomadas pelo gestor do fundo – precisam seguir objetivos e políticas pré-definidas. Os investimentos podem ser bem-sucedidos ou não, e isso determinará a valorização ou a desvalorização das cotas dos fundos.</p></body>
+
+<body>A soma dos recursos compõem o patrimônio, que é dividido em cotas – ou “frações” do fundo. Quem aplica, na verdade, está comprando cotas. O cotista não pode exercer nenhum direito real sobre os empreendimentos do fundo, ao contrário do proprietário de um imóvel de fato. Ao mesmo tempo, também não responde pessoalmente por obrigações relacionadas a eles. Isso é tarefa do administrador, instituição financeira responsável pelo funcionamento e pela manutenção da carteira.</p></body>
+
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 <div class=page>
-  <h1>Melhores Fundos Imobiliários</h1>
   {% for table in tables %}
     <h2>{{titles[loop.index]}}</h2>
     {{ table|safe }}
