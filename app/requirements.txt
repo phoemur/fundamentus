@@ -6,3 +6,4 @@ lxml>=4.6.2
 MarkupSafe>=1.0.0
 Werkzeug>=1.0.0
 pandas
+flask_cors

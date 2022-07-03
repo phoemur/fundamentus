@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
-
+import json
+from flask_cors import CORS, cross_origin
 from flask import Flask, jsonify, render_template, Request
 from fundamentus import get_data
 from fundamentusfii import get_data_fii
 from datetime import datetime
-import json
 from create_cvs_acoes import analise_acoes 
 from create_cvs_acoes import check_file_acoes 
 from create_cvs_fii import analise_fii 
 from create_cvs_fii import check_file_fii
 
 app = Flask(__name__)
+CORS(app)
 
 # First update
 lista, dia = dict(get_data()), datetime.strftime(datetime.today(), '%d')
@@ -89,4 +90,4 @@ def json_fii_api():
         lista_fii, dia_fii = dict(get_data_fii()), datetime.strftime(datetime.today(), '%d')
         return jsonify(lista_fii)
 
-app.run(host='0.0.0.0',debug=True,port=8080)
+app.run(host='0.0.0.0',debug=False,port=8080)
