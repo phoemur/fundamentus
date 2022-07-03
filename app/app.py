@@ -15,6 +15,7 @@ app = Flask(__name__)
 lista, dia = dict(get_data()), datetime.strftime(datetime.today(), '%d')
 lista = {outer_k: {inner_k: float(inner_v) for inner_k, inner_v in outer_v.items()} for outer_k, outer_v in lista.items()}
 
+
 @app.route("/",methods=['GET'])
 def fundamentus():
     check_file_acoes()
@@ -49,6 +50,7 @@ def melhoresacoes(page_id):
         return render_template('view_acoes.html',tables=[anlise.to_html()],titles = ['na'])
     else:
         return render_template('error.html')
+
 
 @app.route("/fii/<page_id>",methods=['GET'])
 def melhoresfii(page_id):
