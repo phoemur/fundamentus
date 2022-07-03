@@ -6,7 +6,7 @@ Esta é uma pequena API feita em python3 para análise de ações da BOVESPA uti
 0. [X] Efetuar web scrapingg na página da fundamentus para obter ações da bolsa brasileira
 1. [X] Excluir empresas com EBIT negativo
 2. [X] Excluir empresas com EBITDA negativo
-4. [0] Excluir empresas em recuperação judicial
+4. [] Excluir empresas em recuperação judicial
 5. [X] Criar ranking por Dividend yield, P/VP, P/L
 6. [X] Gerar csv a partir dos dados processados
 7. [X] Mostra Dividend yield maior que 6%
