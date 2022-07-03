@@ -27,7 +27,7 @@ def todecimal(string):
     return string
 
 
-def get_data(*args, **kwargs):
+def get_data_fii(*args, **kwargs):
     url = 'http://www.fundamentus.com.br/fii_resultado.php'
     cookie_jar = http.cookiejar.CookieJar()
     opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookie_jar))
@@ -91,7 +91,7 @@ if __name__ == '__main__':
     from waitingbar import WaitingBar
     
     #progress_bar = WaitingBar('[*] Downloading...')
-    result = get_data()
+    result = get_data_fii()
     #progress_bar.stop()
 
     result_format = '{0:<10} {1:<20} {2:<10} {3:<15} {4:<10} {5:<7} {6:<15} {7:<15} {8:<15} {9:<15} {10:<15} {11:<7}'

@@ -1,11 +1,11 @@
-from fundamentusfii import get_data
+from fundamentusfii import get_data_fii
 import pandas as pd
 import waitingbar
 import os, time, stat, datetime
 
 
 def data_to_csv_fii():
-    data = get_data()
+    data = get_data_fii()
     #data = {outer_k: {inner_k: float(inner_v) for inner_k, inner_v in outer_v.items()} for outer_k, outer_v in data.items()}
     df_data = pd.DataFrame.from_dict(data).transpose().reset_index() #transposing
     df_data = df_data.rename(columns={'index':'Ticker'}) #rename 'index' columns to 'ticker'
