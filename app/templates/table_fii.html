@@ -1,0 +1,10 @@
+{% extends 'base_fii.html' %}
+{% block conteudo %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<div class=page>
+  {% for table in tables %}
+    <h2>{{titles[loop.index]}}</h2>
+    {{ table|safe }}
+  {% endfor %}
+</div>
+{% endblock conteudo %}

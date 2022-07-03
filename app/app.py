@@ -61,7 +61,7 @@ def melhoresfii(page_id):
     if page_id <= 100:
         check_file_fii()
         anlise = analise_fii(page_id)
-        return render_template('view_fii.html',tables=[anlise.to_html()],titles = ['na'])
+        return render_template('table_fii.html',tables=[anlise.to_html()],titles = ['na'])
     else:
         return render_template('error.html')
 

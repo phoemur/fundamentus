@@ -1,5 +1,10 @@
-<!doctype html>
-<title>Melhores Fundos Imobiliários</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Melhores Fundos Imobiliários</title>
+</head>
+
 <h1>Melhores Fundos Imobiliários</h1>
 
 <body></p>É possível viver de renda aplicando em fundos imobiliários, em vez de imóveis físicos, e com algumas vantagens. Desde que os brasileiros perceberam isso, o volume de novas carteiras emitidas cresceu sem parar. Os fundos imobiliários se tornaram um investimento da moda, vistos como uma maneira mais simples e barata de aplicar no setor.</p></body>
@@ -10,13 +15,10 @@
 
 <body>As decisões sobre o que fazer com os recursos – tomadas pelo gestor do fundo – precisam seguir objetivos e políticas pré-definidas. Os investimentos podem ser bem-sucedidos ou não, e isso determinará a valorização ou a desvalorização das cotas dos fundos.</p></body>
 
-<body>A soma dos recursos compõem o patrimônio, que é dividido em cotas – ou “frações” do fundo. Quem aplica, na verdade, está comprando cotas. O cotista não pode exercer nenhum direito real sobre os empreendimentos do fundo, ao contrário do proprietário de um imóvel de fato. Ao mesmo tempo, também não responde pessoalmente por obrigações relacionadas a eles. Isso é tarefa do administrador, instituição financeira responsável pelo funcionamento e pela manutenção da carteira.</p></body>
+<body>A soma dos recursos compõem o patrimônio, que é dividido em cotas – ou "frações" do fundo. Quem aplica, na verdade, está comprando cotas. O cotista não pode exercer nenhum direito real sobre os empreendimentos do fundo, ao contrário do proprietário de um imóvel de fato. Ao mesmo tempo, também não responde pessoalmente por obrigações relacionadas a eles. Isso é tarefa do administrador, instituição financeira responsável pelo funcionamento e pela manutenção da carteira.</p></body>
 
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-<div class=page>
-  {% for table in tables %}
-    <h2>{{titles[loop.index]}}</h2>
-    {{ table|safe }}
-  {% endfor %}
-</div>
+{% block conteudo %}
 
+{% endblock conteudo %}
+
+</html>
