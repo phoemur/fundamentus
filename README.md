@@ -17,7 +17,6 @@ Execute o _python3 app/app.py_ e conecte no endereço a baixo com seu browser
 
 
 ## Acessando as melhores ações e fundos imobiliários
-
 Aqui voce pode colocar um valor menor ou igual a 100, como segue o exemplo
 
 * http://127.0.0.1/acoes/10
@@ -27,7 +26,12 @@ Aqui voce pode colocar um valor menor ou igual a 100, como segue o exemplo
 * http://127.0.0.1/api/acoes/fundamentus.json
 * http://127.0.0.1/api/fii/fundamentus.json
 
-
-
 ## Health check
 * http://127.0.0.1/health
+
+## Docker app
+* podman build -t fundamentus:v1 .
+* podman run -it --rm --name fundamentus_app -p 8080:8080 fundamentus:v1
+
+## Deploy openshift
+[Comandos openshift](https://github.com/laurobmb/fundamentus/blob/master/openshift.comandos.md)
