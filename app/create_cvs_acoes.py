@@ -12,10 +12,9 @@ def data_to_csv_acoes():
     df_data.to_csv(r'fundamentus.csv', sep=';', index=False, mode='w') #save csv
 
 def analise_acoes(NUMBER):
-    recuperacao_judicial = ["TEKA4", "TCNO4", "RPMG3", "LUPA3","OIBR4","MWET4","MMXM3","INEP4","VIVR3","FRTA3","IGBR3","SLED3","FHER3","HOOT4"]
+    #recuperacao_judicial = ["TEKA4", "TCNO4", "RPMG3", "LUPA3","OIBR4","MWET4","MMXM3","INEP4","VIVR3","FRTA3","IGBR3","SLED3","FHER3","HOOT4"]
     df_fundamentus = pd.read_csv('fundamentus.csv',sep=';')
-    for triker in recuperacao_judicial:
-        df_fundamentus = df_fundamentus[df_fundamentus['Ticker'] != triker]
+    #df_fundamentus = df_fundamentus[df_fundamentus['Ticker'].isin(recuperacao_judicial)]
     df_fundamentus = df_fundamentus[
         (df_fundamentus['DY'] <= 1) & (df_fundamentus['DY'] >= 0.06 ) & 
         (df_fundamentus['P/L'] <= 10) & (df_fundamentus['P/L'] >= 0.01 ) &
