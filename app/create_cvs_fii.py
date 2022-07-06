@@ -18,7 +18,7 @@ def analise_fii(NUMBER):
         (df_fii['FFOYield'] <= 1) & (df_fii['FFOYield'] >= 0.01 ) &
         (df_fii['P/VP'] <= 4) & (df_fii['P/VP'] >= 0.01 ) &
         (df_fii['LIQUIDEZ'] > 5000 )].sort_values(
-            by=["DY","P/VP","FFOYield","QTDIMAVEIS"],ascending=False)
+            by=["DY","P/VP","FFOYield","LIQUIDEZ"],ascending=False)
     return df_fii.head(NUMBER)
 
 def check_file_fii():
