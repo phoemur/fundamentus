@@ -13,6 +13,7 @@ Esta é uma pequena API feita em python3 para análise de ações da BOVESPA uti
 7. [X] Evita Earning Yield negativo e maior que 10%
 8. [X] Evita PL negativo e maior que 4
 9. [X] Evita ROE negativo e maior que 80%
+10. [X] excluindo fundos com liquidez baixa
 
 ## instalação:
 * pip3 install -r app/requirements.txt
