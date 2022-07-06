@@ -6,8 +6,6 @@
 
     oc new-app --name fundamentus --labels app=fundamentus https://github.com/laurobmb/fundamentus.git#master --context-dir app --strategy=source --env ENVIROMENT="prod"
 
-    oc expose svc fundamentus
-
     oc -n fundamentus expose service fundamentus
 
     oc -n fundamentus expose service fundamentus --name fundamentus-hml --hostname fundamentus-fundamentus.hml.lagomes.rhbr-lab.com
