@@ -9,10 +9,7 @@ from lxml.html import fragment_fromstring
 from collections import OrderedDict
 from decimal import Decimal
 
-def get_data(value, **kwargs):
-    setor = kwargs.get('setor')
-    if setor == 0:
-      setor = ''
+def get_data(*args, **kwargs):
     url = 'http://www.fundamentus.com.br/resultado.php'
     cookie_jar = http.cookiejar.CookieJar()
     opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookie_jar))
@@ -57,7 +54,7 @@ def get_data(value, **kwargs):
             'divbruta_max': '',
             'tx_cresc_rec_min': '',
             'tx_cresc_rec_max': '',
-            'setor': setor,
+            'setor': '',
             'negociada': 'ON',
             'ordem': '1',
             'x': '28',
@@ -109,7 +106,7 @@ if __name__ == '__main__':
     from waitingbar import WaitingBar
     
     progress_bar = WaitingBar('[*] Downloading...')
-    result = get_data(1,setor=2)
+    result = get_data()
     progress_bar.stop()
 
     result_format = '{0:<7} {1:<7} {2:<10} {3:<7} {4:<10} {5:<7} {6:<10} {7:<10} {8:<10} {9:<11} {10:<11} {11:<7} {12:<11} {13:<11} {14:<7} {15:<11} {16:<5} {17:<7}'

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import json
 from flask_cors import CORS, cross_origin
-from flask import Flask, jsonify, render_template, Request
+from flask import Flask, jsonify, render_template, Request, request
 from fundamentus import get_data
 from fundamentusfii import get_data_fii
 from datetime import datetime
@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)
 
 # First update
-lista, dia = dict(get_data()), datetime.strftime(datetime.today(), '%d')
+lista, dia = dict(get_data(1)), datetime.strftime(datetime.today(), '%d')
 lista = {outer_k: {inner_k: float(inner_v) for inner_k, inner_v in outer_v.items()} for outer_k, outer_v in lista.items()}
 
 @app.route("/",methods=['GET'])
@@ -37,8 +37,12 @@ def health():
     return response
 
 
-@app.route("/acoes/<page_id>",methods=['GET'])
+@app.route("/acoes/<page_id>",methods=['POST', 'GET'])
 def melhoresacoes(page_id):
+    value = request.form.get('setor')
+    if value is None:
+        value = ''
+    print('melhoresacoes',value)
     try:
         page_id = int(page_id)
     except ValueError as e:
@@ -46,7 +50,7 @@ def melhoresacoes(page_id):
         return render_template('error.html')
 
     if page_id <= 100:
-        check_file_acoes()
+        check_file_acoes(value)
         anlise = analise_acoes(page_id)
         return render_template('view_acoes.html',tables=[anlise.to_html()],titles = ['na'])
     else:
@@ -90,4 +94,4 @@ def json_fii_api():
         lista_fii, dia_fii = dict(get_data_fii()), datetime.strftime(datetime.today(), '%d')
         return jsonify(lista_fii)
 
-app.run(host='0.0.0.0',debug=False,port=8080)
+app.run(host='0.0.0.0',debug=True,port=8080)
